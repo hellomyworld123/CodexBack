@@ -1,42 +1,63 @@
-# Sahar Backend API
+# Sahar Nails – Backend (Node.js/Express)
 
-Backend API for Sahar Nail Care application.
+Backend API pour Sahar Nail Care, basé sur Node.js, Express, MongoDB, déployé sur Render.
 
-## Environment Variables
+## Résumé du projet
+- API REST pour la gestion des réservations, utilisateurs, services
+- Authentification JWT, gestion des emails (SendGrid)
+- CI/CD automatisé (GitHub Actions, Render)
+- Sécurité (Helmet, CORS), logs (Morgan)
 
-The following environment variables are required for the application to run:
-
-- `MONGO_URI`: MongoDB Atlas connection string
-- `JWT_SECRET`: Secret key for signing JSON Web Tokens
-- `SENDGRID_API_KEY`: SendGrid API key for sending emails
-- `SENDGRID_FROM_EMAIL`: Default sender email address for SendGrid
-
-## Setup
-
-1. Clone the repository
-2. Copy `.env.example` to `.env` and fill in the required variables
-3. Install dependencies: `npm install`
-4. Start the server: `npm start`
-
-## Development
-
-Run the server in development mode with hot reload:
+## Installation locale
 
 ```bash
-npm run dev
+# 1. Cloner le repo
+ git clone https://github.com/iseuuh/sahar-backend-prod.git
+ cd sahar-backend-prod
+
+# 2. Installer les dépendances
+ npm install
+
+# 3. Créer le fichier .env
+ cp .env.example .env
+
+# 4. Lancer le serveur de dev
+ npm run dev
 ```
 
-## API Endpoints
+## Déploiement cloud
+- **Render** : push sur `master` déclenche le build et le déploiement automatique
+- Configurer les variables d’environnement dans Render Dashboard
 
-### Reservations
-- `GET /api/reservations`: Get all reservations
-- `POST /api/reservations`: Create a new reservation
-- `PUT /api/reservations/:id`: Update a reservation
-- `DELETE /api/reservations/:id`: Delete a reservation
+## Variables d’environnement
+- `MONGO_URI` : URL de connexion MongoDB Atlas
+- `JWT_SECRET` : Clé secrète JWT
+- `SENDGRID_API_KEY` : Clé API SendGrid
+- `SENDGRID_FROM_EMAIL` : Email expéditeur par défaut
+- `PORT` : Port d’écoute (défaut 5000)
 
-### Authentication
-- `POST /api/auth/register`: Register a new user
-- `POST /api/auth/login`: Login user
-- `GET /api/auth/verify`: Verify email
-- `POST /api/auth/forgot-password`: Request password reset
-- `POST /api/auth/reset-password`: Reset password 
+## Structure des dossiers
+```
+backend/
+├── controllers/     # Logique métier (réservations, auth, ...)
+├── models/          # Schémas Mongoose
+├── routes/          # Définition des routes API
+├── middleware/      # Middlewares Express
+├── scripts/         # Scripts utilitaires (ex: createAdmin)
+├── tests/           # Tests unitaires (Jest)
+├── server.js        # Point d’entrée principal
+├── render.yaml      # Config Render
+└── ...
+```
+
+## TODO / besoins métiers
+- [ ] Ajouter la gestion multi-tenant
+- [ ] Intégrer Stripe pour le paiement
+- [ ] Ajout d’un dashboard admin avancé
+- [ ] Monitoring/alerting (Sentry, LogRocket...)
+- [ ] RGPD et logs d’accès
+- [ ] Améliorer la documentation API (Swagger, Postman)
+
+---
+
+Pour toute question ou contribution, ouvrez une issue ou contactez l’équipe Sahar Nails. 
